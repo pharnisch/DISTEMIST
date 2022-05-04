@@ -20,9 +20,13 @@ print(f"The testing corpus contains {len(corpus.test)} (pretty long) sample sent
 
 hidden_size = 128
 stacked_embeddings = StackedEmbeddings(embeddings=[WordEmbeddings("es"), FlairEmbeddings("es-forward"), FlairEmbeddings("es-backward")]) # TransformerWordEmbeddings()
-roberta_embeddings = TransformerWordEmbeddings("roberta-base-bne")
-dictionary = corpus.make_tag_dictionary(task)
+#roberta_embeddings = TransformerWordEmbeddings("roberta-base-bne")
+dictionary = flair.data.Dictionary(add_unk=False)
+dictionary.add_item("O")
+dictionary.add_item("B-ENFERMEDAD")
+dictionary.add_item("I-ENFERMEDAD")
 tagger = SequenceTagger(stacked_embeddings, dictionary, task)
+tagger.cuda(0)
 
 trainer = ModelTrainer(tagger, corpus)
 trainer.train(
@@ -34,5 +38,5 @@ trainer.train(
     weight_decay=0.,
     embeddings_storage_mode="none",
     scheduler=OneCycleLR,
-    optimizer=torch.optim.AdamW
+    optimizer=torch.optim.AdamW,
 )
