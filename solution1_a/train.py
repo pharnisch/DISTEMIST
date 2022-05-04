@@ -26,7 +26,6 @@ dictionary.add_item("O")
 dictionary.add_item("B-ENFERMEDAD")
 dictionary.add_item("I-ENFERMEDAD")
 tagger = SequenceTagger(stacked_embeddings, dictionary, task)
-tagger.cuda(0)
 
 trainer = ModelTrainer(tagger, corpus)
 trainer.train(
