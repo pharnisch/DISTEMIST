@@ -7,10 +7,9 @@ data_folder = "../flair_style_training_data/"
 corpus = ColumnCorpus(data_folder, columns, train_file="all.txt") #.downsample(0.1)
 
 tagger = SequenceTagger.load("taggers/ner-stacked/final-model.pt")
+s = Sentence("Confirmando masa nodular, siendo el tumor adenomatoide de epidídimo la primera posibilidad diagnóstica.")
+tagger(s)
+print(s)
 
-
-print(tagger.predict(Sentence("Confirmando masa nodular, siendo el tumor adenomatoide de epidídimo la primera posibilidad diagnóstica.")))
-
-
-result, loss = tagger.evaluate(corpus.test)
-print(result.detailed_results, loss)
+result = tagger.evaluate(corpus.test)
+print(result)
