@@ -23,8 +23,7 @@ stacked_embeddings = StackedEmbeddings(embeddings=[WordEmbeddings("es"), FlairEm
 #roberta_embeddings = TransformerWordEmbeddings("roberta-base-bne")
 dictionary = flair.data.Dictionary(add_unk=False)
 dictionary.add_item("O")
-dictionary.add_item("B-ENFERMEDAD")
-dictionary.add_item("I-ENFERMEDAD")
+dictionary.add_item("ENFERMEDAD")
 tagger = SequenceTagger(stacked_embeddings, dictionary, task)
 
 trainer = ModelTrainer(tagger, corpus)
