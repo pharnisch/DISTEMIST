@@ -2,6 +2,7 @@ import os
 from flair.data import Sentence
 from pathlib import Path
 
+
 def get_o_for_empty_strings(s: str):
     if s == "":
         return "O"
@@ -43,7 +44,7 @@ for line in annotation_file:
 
 files_amount = len(os.listdir(text_files_directory))
 files_parsed = 0
-amount_of_files_to_parse = 2
+amount_of_files_to_parse = -1
 
 for file in os.listdir(text_files_directory):
     file_name = os.fsdecode(file)
